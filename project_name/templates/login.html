@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <!-- Title and other stuffs -->
+  <title>Login - XXX比賽分析系統</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+
+  <!-- Stylesheets -->
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+  <script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+  <!--[if lt IE 9]>
+  <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
+  <![endif]-->
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon/favicon.png') }}">
+</head>
+
+<body>
+
+<!-- Form area -->
+<div class="admin-form">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Widget starts -->
+            <div class="widget worange">
+              <!-- Widget head -->
+              <div class="widget-head">
+                <i class="fa fa-lock"></i> Login 
+              </div>
+
+              <div class="widget-content">
+                <div class="padd">
+                  <!-- Login form -->
+                  <form id="loginForm" class="form-horizontal" action="{{ url_for('login') }}" method="post">  <!--post to same page-->
+                    <!-- Email -->
+                    <div class="form-group">
+                      <label class="control-label col-lg-3" for="inputEmail">Email</label>
+                      <div class="col-lg-9">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email">
+                      </div>
+                    </div>
+                    <!-- Password -->
+                    <div class="form-group">
+                      <label class="control-label col-lg-3" for="inputPassword">Password</label>
+                      <div class="col-lg-9">
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
+                      </div>
+                    </div>
+                    <!-- Remember me checkbox and sign in button -->
+                    <div class="form-group">
+					<div class="col-lg-9 col-lg-offset-3">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" name="remember"> Remember me for a week (not working)
+                        </label>
+						</div>
+					</div>
+					</div>
+                        <div class="col-lg-9 col-lg-offset-3">
+							<button type="submit" class="btn btn-info btn-sm">Sign in</button>
+							<button type="reset" class="btn btn-default btn-sm">Reset</button>
+						</div>
+                    <br />
+                  </form>
+				  
+				</div>
+                </div>
+            </div>  
+      </div>
+    </div>
+  </div> 
+</div>
+	
+		
+
+<!-- JS -->
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.validate.min.js') }}"></script> <!-- jQuery Validate -->
+
+<!-- jQuery Notification - Noty -->
+<script src="{{ url_for('static', filename='js/jquery.noty.js') }}"></script> <!-- jQuery Notify -->
+<script src="{{ url_for('static', filename='js/themes/default.js') }}"></script> <!-- jQuery Notify -->
+<script src="{{ url_for('static', filename='js/layouts/bottom.js') }}"></script> <!-- jQuery Notify -->
+<script src="{{ url_for('static', filename='js/layouts/topRight.js') }}"></script> <!-- jQuery Notify -->
+<script src="{{ url_for('static', filename='js/layouts/top.js') }}"></script> <!-- jQuery Notify -->
+
+<script>
+  $(document).ready(function(){
+        setTimeout(function(){
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        noty({
+                            text: '{{ message }}',
+                            layout:'topRight',
+                            type:'information',
+                            timeout:15000
+                        });
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        }, 1000);
+    });
+  $("#loginForm").validate({
+      rules: {
+        password: {
+          required: true,
+          minlength: 8
+        },
+        email: {
+          required: true,
+          email: true
+        },
+      },
+      messages: {
+        password: {
+          required: "Please provide a password",
+          minlength: "Your password must be at least 8 characters long"
+        },
+        email: "Please enter a valid email address",
+      }
+    });
+</script>
+</body>
+</html>

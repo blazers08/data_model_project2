@@ -1,0 +1,187 @@
+{% extends "index.html" %}
+{% block body %}
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="pull-left"><i class="fa fa-table"></i> 場地管理 </h2>
+	<!-- Breadcrumb -->
+	<div class="bread-crumb pull-right">
+		<a href="{{ url_for('show_entries') }}"><i class="fa fa-home"></i> Home</a>
+		<!-- Divider -->
+		<span class="divider">/</span> 
+		<a href="{{ url_for('field.simple_list') }}" class="bread-current">場地列表</a>
+	</div>
+
+	<div class="clearfix"></div>
+
+</div>
+<!-- Page heading ends -->
+
+<!-- Matter -->
+<div class="matter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+				<div class="widget">
+					<div class="widget-head">
+						<div class="pull-left">場地列表</div>
+						<div class="widget-icons pull-right">
+							<a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a> 
+							<a href="#" class="wclose"><i class="fa fa-times"></i></a>
+						</div>  
+						<div class="clearfix"></div>
+					</div>
+
+					<div class="widget-content">
+                        <div class="padd">
+                            <a href="{{ url_for('field.create') }}">
+                                <button type="button" class="btn btn-sm btn-primary">
+									<i class="fa fa-plus"></i>
+									新增場地
+								</button>
+                            </a>
+                        </div>
+
+						<div class="padd">
+							<div class="page-tables">
+								<div class="table-responsive">
+									<div class="dataTables_wrapper">
+										<div class="dataTables_length" id="data-table-1_length">
+											<label>Show 
+												<select id="select_page_items" name="data-table-1_length" aria-controls="data-table-1" class="" onChange="relocate(this);">
+													<option value="10">10</option>
+													<option value="25">25</option>
+													<option value="50">50</option>
+													<option value="100">100</option>
+												</select>
+												 entries
+											</label>
+										</div>
+										<div id="data-table-1_filter" class="dataTables_filter">
+											<form action="{{ url_for('field.search') }}" method="post">
+												<label>Search:</label>
+                                                <select id="s_key" name="s_key" aria-controls="data-table-1">
+                                                    <option value="name">名稱</option>
+                                                    <option value="address">地址</option>
+                                                </select>
+                                                <input name="s_value" type="search" placeholder="search for ..." aria-controls="data-table-1" value="{{ misc['s_value'] }}">
+                                                <button type="submit" class="btn btn-sm btn-success">查詢</button>
+												{% if misc['s_value'] %}
+													<a class="btn btn-sm btn-danger" href="{{ url_for('field.simple_list') }}">取消</a>
+												{% endif %}
+											</form>
+										</div>
+										<table class="dataTable">
+										  <thead>
+											<tr>
+											  <th class="sorting" id="name" onclick="resort(this)">場地名稱</th>
+											  <th class="sorting" id="address" onclick="resort(this)">地址</th>
+											  <th class="sorting" id="created" onclick="resort(this)">建立時間</th>
+											  <th class="sorting" id="modified" onclick="resort(this)">編修時間</th>
+											  <th class="sorting" id="status" onclick="resort(this)">狀態</th>
+											  <th>Control</th>
+											</tr>
+										  </thead>
+										  <tbody>
+                                            {% for field in fields %}
+											<tr>
+												<td>{{ field[1] }}</td>
+												<td>{{ field[2] }}</td>
+												<td>{{ field[3]|strftime }}</td>
+												<td>{{ field[4]|strftime }}</td>
+												<td>
+													{% if field[5]==1 %}
+														<span class="label label-large label-success"><i class="fa fa-check"></i></span>
+													{% else %}
+														<span class="label label-large label-danger"><i class="fa fa-times"></i></span>
+													{% endif %}
+												</td>
+												<td>
+													<a href="{{ url_for('field.view', field_id=field[0]) }}">
+														<button class="btn btn-xs btn-success"><i class="fa fa-eye"></i> </button>
+													</a>
+													<a href="{{ url_for('field.update', field_id=field[0]) }}">
+														<button class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> </button>
+													</a>
+													<a href="{{ url_for('field.delete', field_id=field[0]) }}">
+														<button class="btn btn-xs btn-danger"><i class="fa fa-times"></i> </button>
+													</a>
+												</td>
+											</tr>
+                                            {% endfor %}
+										  </tbody>
+										</table>
+										<div class="dataTables_info" id="data-table-1_info" role="status" aria-live="polite">Showing {{ misc.start }} to {{ misc.end }} of {{ misc.total }} entries</div>
+										<div class="dataTables_paginate paging_full_numbers">
+											<a class="paginate_button" href="{{ url_for('field.' + action, page=0, items=misc['items'], sort=misc['sort'], asc=misc['asc']) }}">第一頁</a>
+                                            <a class="paginate_button" href="{{ url_for('field.' + action, page=misc['prev'], items=misc['items'], sort=misc['sort'], asc=misc['asc']) }}">上一頁</a>
+                                                <span>
+                                                    {% for page_no in range(misc['paging_from'], misc['paging_to'] + 1) %}
+                                                    <a class="paginate_button" href="{{ url_for('field.' + action, page=page_no, items=misc['items'], sort=misc['sort'], asc=misc['asc']) }}">{{ page_no + 1 }}</a>
+                                                    {% endfor %}
+                                                </span>
+                                            <a class="paginate_button" href="{{ url_for('field.' + action, page=misc['next'], items=misc['items'], sort=misc['sort'], asc=misc['asc']) }}">下一頁</a>
+                                            <a class="paginate_button" href="{{ url_for('field.' + action, page=misc['last'], items=misc['items'], sort=misc['sort'], asc=misc['asc']) }}">最後一頁</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Matter ends -->
+
+<script>
+//this part is about table sort and relocate
+var page_url = "{{ url_for('field.' + action) }}";
+var page_field = "{{misc['sort']}}";
+var page_sort = {{misc['asc']}};
+var page_items = {{misc['items']}};
+var page_page = {{misc['page']}};
+
+function relocate(){ 
+
+	var item = document.getElementById("select_page_items");
+	var item_val=item.options[item.selectedIndex].value;
+	console.log(item_val);
+
+	sort_table(page_url, page_field, page_sort, item_val, page_page);
+}
+
+function resort(element){
+	var target_field = element.id;
+	console.log(target_field);
+	rsort_table(page_url, target_field, page_sort, page_items, page_page);
+}
+
+$(document).ready(function(){
+    console.log('document ready');
+
+	//change field class in thead
+	sort_table_style(page_field,page_sort);
+
+	//change pageitem selector to {{misc['items']}}
+	var item = document.getElementById("select_page_items");
+	for(var i=0 ; i<item.options.length ; i++) {
+		if(item.options[i].value == page_items) {
+			item.selectedIndex = i;
+			break;
+		}
+	}
+
+	//change search selector to {{misc['s_key']}}
+	var item = document.getElementById("s_key");
+	for(var i=0 ; i<item.options.length ; i++) {
+		if(item.options[i].value == "{{ misc['s_key'] }}") {
+			item.selectedIndex = i;
+			break;
+		}
+	}
+	
+});
+</script>
+{% endblock %}

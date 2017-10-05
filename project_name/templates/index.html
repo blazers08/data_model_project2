@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% include "head.html" %}
+	</head> 
+
+	<body> 
+		{% include "navbar.html" %}
+
+		{% include "header.html" %}
+
+		<div class="content">
+
+			{% include "sidebar.html" %}
+
+			<!-- Mainbar -->
+			<div class="mainbar">
+				{% block body %}{% endblock %}
+			</div>
+            <!-- Mainbar ends -->
+			<script>
+				$(document).ready(function(){
+					setTimeout(function(){
+						{% with messages = get_flashed_messages() %}
+							{% if messages %}
+								{% for message in messages %}
+									noty({
+										text: '{{ message }}',
+										layout:'topRight',
+										type:'information',
+										timeout:15000
+									});
+								{% endfor %}
+							{% endif %}
+						{% endwith %}
+					}, 1000);
+				});
+			</script>
+
+			<div class="clearfix"></div>
+		</div>
+
+		{% include "footer.html" %}
+
+		<!-- Scroll to top -->
+		<span class="totop"><a href="#"><i class="fa fa-chevron-up"></i></a></span> 
+
+	</body>
+</html>

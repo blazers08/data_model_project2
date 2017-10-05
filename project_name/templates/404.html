@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <!-- Title and other stuffs -->
+  <title>Error - MacAdmin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+
+  <!-- Stylesheets -->
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  
+  <script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+  <!--[if lt IE 9]>
+  <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
+  <![endif]-->
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="img/favicon/favicon.png">
+</head>
+
+<body>
+
+<!-- Form area -->
+<div class="error-page">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <!-- Widget starts -->
+            <div class="widget">
+              <!-- Widget head -->
+              <div class="widget-head">
+                <i class="fa fa-question-circle"></i> Error 
+              </div>
+
+              <div class="widget-content">
+                <div class="padd error">
+
+                  <h1>Opps!!! It's 404</h1>
+                  <p>總而言之, 言而總之, 一言以蔽之; 請回首頁:P</p>
+                  <br />
+                 <div class="horizontal-links">
+                  <a href="{{ url_for('show_entries') }}">Home</a>
+                 </div>
+
+                </div>
+                <div class="widget-foot">
+                  <!-- Footer goes here -->
+                </div>
+              </div>
+            </div>  
+      </div>
+    </div>
+  </div> 
+</div>
+	
+		
+
+<!-- JS -->
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>
