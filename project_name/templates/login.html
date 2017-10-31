@@ -31,21 +31,41 @@
   }
   .admin-form {
     border-radius: 3px;
-    background-color: rgba(0, 0, 0, 0.65);
-    height: 300px;
-    min-width: 350px;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 450px;
+    min-width: 800px;
     width: 30%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .widget-head {
-    color: white;
-    font-size: 20px;
-    padding: 3px;
-    letter-spacing: 2px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex:7;
+    background-color: rgba(39, 35, 35, 0.84);
+    height: 100%;
+  }
+  .widget-content {
+    flex:5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .image {
+    background-image: url("https://www.cheatsheet.com/wp-content/uploads/2015/07/GettyImages-479559494.jpg");
+    height: 100%;
+    width: 100%;
+    background-position-x: center;
+    background-size: cover;
+  }
+  .loginTitle {
+    color: white;
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-align: center;
   }
   .form-control {
     display: flex;
@@ -95,36 +115,27 @@
 
 <!-- Form area -->
 <body>
-<div class="admin-form">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <!-- Widget starts -->
-            <div class="widget worange">
-              <!-- Widget head -->
-              <div class="widget-head">
-                MLB Analysis Login
-              </div>
-              <div class="widget-content">
-                <div class="padd">
-                  <!-- Login form -->
-                  <form id="loginForm" class="form-horizontal" action="{{ url_for('login') }}" method="post">  <!--post to same page-->
-                    <!-- Email -->
-                      <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email">
-                    <!-- Password -->
-                      <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
-                    <div class="login">
-    					       <button type="submit" class="loginBtn">Sign in</button>
-    					       <!-- <button type="reset" class="btn btn-default btn-sm">Reset</button> -->
-    				        </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="admin-form">
+    <!-- Widget head -->
+    <div class="widget-head">
+      <div class="image"></div>
+      <!-- <p>MLB Analysis Login<p> -->
     </div>
+    <div class="widget-content">
+        <!-- Login form -->
+        <form id="loginForm" class="form-horizontal" action="{{ url_for('login') }}" method="post">  <!--post to same page-->
+          <p class="loginTitle">MLB Analysis Login<p>
+          <!-- Email -->
+            <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email">
+          <!-- Password -->
+            <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
+            <div class="login">
+    	         <button type="submit" class="loginBtn">Sign in</button>
+    	         <!-- <button type="reset" class="btn btn-default btn-sm">Reset</button> -->
+            </div>
+        </form>
+    </div>
+  </div>
 </body>
 
 
