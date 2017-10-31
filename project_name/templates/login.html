@@ -4,89 +4,134 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
   <!-- Title and other stuffs -->
-  <title>Login - XXX比賽分析系統</title>
+  <title>Login - MLB Analysis</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="keywords" content="">
   <meta name="author" content="">
-
   <!-- Stylesheets -->
-  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
-  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
-
+  <!-- <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"> -->
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"> -->
+  <!-- <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"> -->
   <script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
-  <!--[if lt IE 9]>
+  <!--[if lt IE 9] -->
   <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
-  <![endif]-->
-
+  <!--[endif]-->
   <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon/favicon.png') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon/MLBLogo.jpg') }}">
 </head>
+<style>
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-image: url("http://cdn1.thecomeback.com/wp-content/uploads/sites/94/2014/02/mlbbaseballcloseup.jpg");
+  }
+  .admin-form {
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.65);
+    height: 300px;
+    min-width: 350px;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .widget-head {
+    color: white;
+    font-size: 20px;
+    padding: 3px;
+    letter-spacing: 2px;
+    display: flex;
+    justify-content: center;
+  }
+  .form-control {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin-top: 12px;
+    width: 250px;
+    height: 25px;
+    font-size: 14px;
+    border: none;
+    background-color: rgba(125, 125, 125, 0.52);
+    outline: none;
+    color: white;
+}
+  input::placeholder {
+    color: white;
+}
+  .login {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+  .loginBtn {
+    display: flex;
+    justify-content: center;
+    color: white;
+    background-color: rgba(255,255,255,0.1);
+    border: 1px white solid;
+    outline: none;
+    font-size: 14px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 1px;
+  }
 
-<body>
+  button:hover {
+    background-color: white;
+    color: #003057;
+    font-size: 15px;
+  }
+  .error {
+    font-size: 14px;
+    color: rgb(247, 77, 109);
+  }
+</style>
 
 <!-- Form area -->
+<body>
 <div class="admin-form">
   <div class="container">
-
     <div class="row">
       <div class="col-md-12">
         <!-- Widget starts -->
             <div class="widget worange">
               <!-- Widget head -->
               <div class="widget-head">
-                <i class="fa fa-lock"></i> Login 
+                MLB Analysis Login
               </div>
-
               <div class="widget-content">
                 <div class="padd">
                   <!-- Login form -->
                   <form id="loginForm" class="form-horizontal" action="{{ url_for('login') }}" method="post">  <!--post to same page-->
                     <!-- Email -->
-                    <div class="form-group">
-                      <label class="control-label col-lg-3" for="inputEmail">Email</label>
-                      <div class="col-lg-9">
-                        <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email">
-                      </div>
-                    </div>
+                      <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email">
                     <!-- Password -->
-                    <div class="form-group">
-                      <label class="control-label col-lg-3" for="inputPassword">Password</label>
-                      <div class="col-lg-9">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
-                      </div>
-                    </div>
-                    <!-- Remember me checkbox and sign in button -->
-                    <div class="form-group">
-					<div class="col-lg-9 col-lg-offset-3">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" name="remember"> Remember me for a week (not working)
-                        </label>
-						</div>
-					</div>
-					</div>
-                        <div class="col-lg-9 col-lg-offset-3">
-							<button type="submit" class="btn btn-info btn-sm">Sign in</button>
-							<button type="reset" class="btn btn-default btn-sm">Reset</button>
-						</div>
-                    <br />
+                      <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
+                    <div class="login">
+    					       <button type="submit" class="loginBtn">Sign in</button>
+    					       <!-- <button type="reset" class="btn btn-default btn-sm">Reset</button> -->
+    				        </div>
                   </form>
-				  
-				</div>
                 </div>
-            </div>  
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div> 
-</div>
-	
-		
+</body>
+
+
 
 <!-- JS -->
 <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
-<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> -->
 <script src="{{ url_for('static', filename='js/jquery.validate.min.js') }}"></script> <!-- jQuery Validate -->
 
 <!-- jQuery Notification - Noty -->
@@ -133,5 +178,4 @@
       }
     });
 </script>
-</body>
 </html>
