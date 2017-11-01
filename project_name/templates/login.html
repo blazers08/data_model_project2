@@ -17,6 +17,8 @@
   <!--[if lt IE 9] -->
   <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
   <!--[endif]-->
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css?family=Bitter|Roboto|Saira:500" rel="stylesheet">
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon/MLBLogo.jpg') }}">
 </head>
@@ -25,13 +27,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url("http://cdn1.thecomeback.com/wp-content/uploads/sites/94/2014/02/mlbbaseballcloseup.jpg");
+    background-color: black;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("{{ url_for('static', filename='img/mlbbk.jpg') }}");
+  }
+  .footerText {
+    position: absolute;
+    left: 20px;
+    bottom: 1px;
+    color: rgb(189, 189, 189);
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
   }
   .admin-form {
     border-radius: 3px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 450px;
     min-width: 800px;
     width: 30%;
@@ -48,6 +63,7 @@
     height: 100%;
   }
   .widget-content {
+    font-family: 'Bitter', serif;
     flex:5;
     display: flex;
     flex-direction: column;
@@ -55,7 +71,7 @@
     align-items: center;
   }
   .image {
-    background-image: url("https://www.cheatsheet.com/wp-content/uploads/2015/07/GettyImages-479559494.jpg");
+    background-image: url("{{ url_for('static', filename='img/loginImg.jpg') }}");
     height: 100%;
     width: 100%;
     background-position-x: center;
@@ -111,30 +127,42 @@
     font-size: 14px;
     color: rgb(247, 77, 109);
   }
+  @media screen and (max-width: 768px) {
+    .widget-head {
+      display: none;
+    }
+    .widget-content {
+      flex:1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 </style>
 
-<!-- Form area -->
 <body>
   <div class="admin-form">
     <!-- Widget head -->
     <div class="widget-head">
       <div class="image"></div>
-      <!-- <p>MLB Analysis Login<p> -->
     </div>
     <div class="widget-content">
         <!-- Login form -->
         <form id="loginForm" class="form-horizontal" action="{{ url_for('login') }}" method="post">  <!--post to same page-->
-          <p class="loginTitle">MLB Analysis Login<p>
+          <p class="loginTitle">MLB Analysis Login</p>
           <!-- Email -->
-            <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email">
+            <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email" />
           <!-- Password -->
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password">
+            <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" />
             <div class="login">
     	         <button type="submit" class="loginBtn">Sign in</button>
-    	         <!-- <button type="reset" class="btn btn-default btn-sm">Reset</button> -->
             </div>
         </form>
     </div>
+  </div>
+  <!-- Footer -->
+  <div>
+    <p class="footerText">Copyright © 2017 MLB Analysis<br> By CT Wang, YC Tien, YC Chen, YC Huang, SS Lin</p>
   </div>
 </body>
 
