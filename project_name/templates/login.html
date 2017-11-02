@@ -1,220 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta charset="utf-8">
-  <!-- Title and other stuffs -->
-  <title>Login - MLB Analysis</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="author" content="">
-  <!-- Stylesheets -->
-  <!-- <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"> -->
-  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"> -->
-  <!-- <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"> -->
-  <script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
-  <!--[if lt IE 9] -->
-  <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
-  <!--[endif]-->
-  <!-- Google font -->
-  <link href="https://fonts.googleapis.com/css?family=Bitter|Roboto|Saira:500" rel="stylesheet">
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon/MLBLogo.jpg') }}">
-</head>
-<style>
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background-color: black;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("{{ url_for('static', filename='img/mlbbk.jpg') }}");
-  }
-  .footerText {
-    position: absolute;
-    left: 20px;
-    bottom: 1px;
-    color: rgb(189, 189, 189);
-    font-size: 12px;
-    letter-spacing: 2px;
-    font-weight: 500;
-    font-family: 'Roboto', sans-serif;
-  }
-  .admin-form {
-    border-radius: 3px;
-    background-color: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    height: 450px;
-    min-width: 800px;
-    width: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .widget-head {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex:7;
-    background-color: rgba(39, 35, 35, 0.84);
-    height: 100%;
-  }
-  .widget-content {
-    font-family: 'Bitter', serif;
-    flex:5;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .image {
-    background-image: url("{{ url_for('static', filename='img/loginImg.jpg') }}");
-    height: 100%;
-    width: 100%;
-    background-position-x: center;
-    background-size: cover;
-  }
-  .loginTitle {
-    color: white;
-    font-size: 20px;
-    letter-spacing: 2px;
-    text-align: center;
-  }
-  .form-control {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    margin-top: 12px;
-    width: 250px;
-    height: 25px;
-    font-size: 14px;
-    border: none;
-    background-color: rgba(125, 125, 125, 0.52);
-    outline: none;
-    color: white;
-}
-  input::placeholder {
-    color: white;
-}
-  .login {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-  .loginBtn {
-    display: flex;
-    justify-content: center;
-    color: white;
-    background-color: rgba(255,255,255,0.1);
-    border: 1px white solid;
-    outline: none;
-    font-size: 14px;
-    width: 150px;
-    height: 40px;
-    cursor: pointer;
-    border-radius: 1px;
-  }
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <!-- Title and other stuffs -->
+    <title>Login - MLB Analysis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <!-- Stylesheets -->
+    <link href="{{ url_for('static', filename='css/loginStyle.css') }}" rel="stylesheet">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Bitter|Roboto|Saira:500" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon/MLBLogo.jpg') }}">
 
-  button:hover {
-    background-color: white;
-    color: #003057;
-    font-size: 15px;
-  }
-  .error {
-    font-size: 14px;
-    color: rgb(247, 77, 109);
-  }
-  @media screen and (max-width: 768px) {
-    .widget-head {
-      display: none;
-    }
-    .widget-content {
-      flex:1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-</style>
+    <script src="{{ url_for('static', filename='js/respond.min.js') }}"></script>
+    <!--[if lt IE 9] -->
+    <script src="{{ url_for('static', filename='js/html5shiv.js') }}"></script>
+    <!--[endif]-->
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.validate.min.js') }}"></script> <!-- jQuery Validate -->
+    <!-- jQuery Notification - Noty -->
+    <script src="{{ url_for('static', filename='js/jquery.noty.js') }}"></script> <!-- jQuery Notify -->
+    <script src="{{ url_for('static', filename='js/themes/default.js') }}"></script> <!-- jQuery Notify -->
+    <script src="{{ url_for('static', filename='js/layouts/bottom.js') }}"></script> <!-- jQuery Notify -->
+    <script src="{{ url_for('static', filename='js/layouts/topRight.js') }}"></script> <!-- jQuery Notify -->
+    <script src="{{ url_for('static', filename='js/layouts/top.js') }}"></script> <!-- jQuery Notify -->
+    <script>
+      $(document).ready(function(){
+            setTimeout(function(){
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            noty({
+                                text: '{{ message }}',
+                                layout:'topRight',
+                                type:'information',
+                                timeout:15000
+                            });
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            }, 1000);
+        });
+      $("#loginForm").validate({
+          rules: {
+            password: {
+              required: true,
+              minlength: 8
+            },
+            email: {
+              required: true,
+              email: true
+            },
+          },
+          messages: {
+            password: {
+              required: "Please provide a password",
+              minlength: "Your password must be at least 8 characters long"
+            },
+            email: "Please enter a valid email address",
+          }
+        });
+    </script>
+  </head>
 
-<body>
-  <div class="admin-form">
-    <!-- Widget head -->
-    <div class="widget-head">
-      <div class="image"></div>
+  <body>
+    <div class="admin-form">
+      <!-- Widget head -->
+      <div class="widget-head">
+        <div class="image"></div>
+      </div>
+      <div class="widget-content">
+          <!-- Login form -->
+          <form id="loginForm" class="form-horizontal" action="{{ url_for('login') }}" method="post">  <!--post to same page-->
+            <p class="loginTitle">MLB Analysis Login</p>
+            <!-- Email -->
+              <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email" />
+            <!-- Password -->
+              <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" />
+              <div class="login">
+      	         <button type="submit" class="loginBtn">Sign in</button>
+              </div>
+          </form>
+      </div>
     </div>
-    <div class="widget-content">
-        <!-- Login form -->
-        <form id="loginForm" class="form-horizontal" action="{{ url_for('login') }}" method="post">  <!--post to same page-->
-          <p class="loginTitle">MLB Analysis Login</p>
-          <!-- Email -->
-            <input type="text" class="form-control" id="inputEmail" placeholder="Email" name="email" />
-          <!-- Password -->
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" />
-            <div class="login">
-    	         <button type="submit" class="loginBtn">Sign in</button>
-            </div>
-        </form>
+    <!-- Footer -->
+    <div>
+      <p class="footerText">Copyright © 2017 MLB Analysis<br> By CT Wang, YC Tien, YC Chen, YC Huang, SS Lin</p>
     </div>
-  </div>
-  <!-- Footer -->
-  <div>
-    <p class="footerText">Copyright © 2017 MLB Analysis<br> By CT Wang, YC Tien, YC Chen, YC Huang, SS Lin</p>
-  </div>
-</body>
+  </body>
 
-
-
-<!-- JS -->
-<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
-<!-- <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> -->
-<script src="{{ url_for('static', filename='js/jquery.validate.min.js') }}"></script> <!-- jQuery Validate -->
-
-<!-- jQuery Notification - Noty -->
-<script src="{{ url_for('static', filename='js/jquery.noty.js') }}"></script> <!-- jQuery Notify -->
-<script src="{{ url_for('static', filename='js/themes/default.js') }}"></script> <!-- jQuery Notify -->
-<script src="{{ url_for('static', filename='js/layouts/bottom.js') }}"></script> <!-- jQuery Notify -->
-<script src="{{ url_for('static', filename='js/layouts/topRight.js') }}"></script> <!-- jQuery Notify -->
-<script src="{{ url_for('static', filename='js/layouts/top.js') }}"></script> <!-- jQuery Notify -->
-
-<script>
-  $(document).ready(function(){
-        setTimeout(function(){
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        noty({
-                            text: '{{ message }}',
-                            layout:'topRight',
-                            type:'information',
-                            timeout:15000
-                        });
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        }, 1000);
-    });
-  $("#loginForm").validate({
-      rules: {
-        password: {
-          required: true,
-          minlength: 8
-        },
-        email: {
-          required: true,
-          email: true
-        },
-      },
-      messages: {
-        password: {
-          required: "Please provide a password",
-          minlength: "Your password must be at least 8 characters long"
-        },
-        email: "Please enter a valid email address",
-      }
-    });
-</script>
 </html>
