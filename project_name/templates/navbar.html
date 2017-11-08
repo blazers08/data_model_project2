@@ -1,13 +1,14 @@
 <div class="navbar navbar-fixed-top bs-docs-nav" role="banner">
-  <div class="conjtainer">
+  <div>
     <!-- Menu button for smallar screens -->
     <div class="navbar-header">
-	  <button class="navbar-toggle btn-navbar" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-		<span>Menu</span>
-	  </button>
+  	  <button class="navbar-toggle btn-navbar" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+  		    <span>Menu</span>
+  	  </button>
 	  <!-- Site name for smallar screens -->
-	  <a href="index.html" class="navbar-brand hidden-lg">MacBeth</a>
-	</div>
+      <!-- <img style="height:50px" src="{{ url_for('static', filename='img/favicon/MLBLogo.jpg') }}"> -->
+	     <a href="index.html" class="navbar-brand">MLB Analysis</a>
+	    </div>
 
     <!-- Navigation starts -->
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
@@ -15,16 +16,18 @@
       <ul class="nav navbar-nav pull-right">
         <li class="dropdown pull-right">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            <i class="fa fa-user"></i> {{g.user_name}} <b class="caret"></b>
+            <i style="background-color:transparent" class="fa fa-user"></i>
+              {{g.user_name}}
+            <!-- <b class="caret"></b> -->
           </a>
 
           <!-- Dropdown menu -->
           <ul class="dropdown-menu">
-            <!--
-            <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-            <li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li>
-            -->
-            <li><a href="{{ url_for('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <!--<li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+            <li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li> -->
+            <li><a href="{{ url_for('logout') }}">
+              <i style="background-color:transparent" class="fa fa-sign-out"></i>Logout</a>
+            </li>
           </ul>
         </li>
 
