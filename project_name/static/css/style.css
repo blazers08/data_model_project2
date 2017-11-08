@@ -53,7 +53,8 @@ p{
 }
 
 a{
-	color: #026b9c;
+	/*color: #026b9c;*/
+	color:#564e4e;
 }
 
 a:hover{
@@ -407,7 +408,6 @@ text-decoration:none;
 /* Navbar */
 
 .navbar *{
-	height: 60px;
 	font-weight: normal !important;
 	text-shadow:none !important;
 	background: #554d4d;
@@ -439,6 +439,7 @@ text-decoration:none;
 
 .navbar-brand{
    color:#777;
+	 font-family: 'Bitter', serif;
    font-size:23px;
    font-weight:bold;
    padding-top:20px;
@@ -714,21 +715,14 @@ header .header-data .hdata em{
 
 
 .sidebar #nav > li > a {
-  display: block;
-  padding: 10px 20px;
-  font-size: 13px;
+	display: block;
+  padding: 15px 20px;
+  font-size: 14px;
   color: #777;
   text-decoration: none;
-  /*border-bottom: 1px solid #ccc;
-  border-top: 1px solid #fff;*/
   background-color: #f8f8f8;
-  /*background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f2f2f2));
-  background: -webkit-linear-gradient(top, #f9f9f9, #f2f2f2);
-  background: -moz-linear-gradient(top, #f9f9f9, #f2f2f2);
-  background: -ms-linear-gradient(top, #f9f9f9, #f2f2f2);
-  background: -o-linear-gradient(top, #f9f9f9, #f2f2f2);
-  background: linear-gradient(top, #f9f9f9, #f2f2f2);*/
   box-shadow: inset 0px 1px 1px #fff;
+  letter-spacing: 2px;
 }
 
 .sidebar #nav > li > a:hover, .sidebar #nav > li.open > a {
@@ -784,7 +778,7 @@ header .header-data .hdata em{
 	position: relative;
 	margin-left: 230px;
 	margin-right: 0px;
-	margin-top: 20px;
+	margin-top: 10px;
 	width: auto;
 	/*background:#eee url("../img/main-back.png") repeat;*/
 	background-color: gainsboro;
@@ -943,16 +937,9 @@ table.dataTable thead .sorting_desc_disabled {
 /* Page head */
 
 .mainbar .page-head{
-  background-color: #f8f8f8;
-  background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f2f2f2));
-  background: -webkit-linear-gradient(top, #f8f8f8, #f2f2f2);
-  background: -moz-linear-gradient(top, #f8f8f8, #f2f2f2);
-  background: -ms-linear-gradient(top, #f8f8f8, #f2f2f2);
-  background: -o-linear-gradient(top, #f8f8f8, #f2f2f2);
-  background: linear-gradient(top, #f8f8f8, #f2f2f2);
+  background-color: transparent;
   padding: 0px 20px;
-  border-bottom: 1px solid #fff;
-  box-shadow: inset 0px 1px 1px #fff;
+	letter-spacing: 2px;
 }
 
 .mainbar .page-head h2{
@@ -1348,7 +1335,6 @@ table.dataTable thead .sorting_desc_disabled {
 	display: inline-block;
 	margin-bottom: 5px;
 	margin-right: 10px;
-    padding: 10px 20px;
   background-color: #f8f8f8;
   background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f2f2f2));
   background: -webkit-linear-gradient(top, #f8f8f8, #f2f2f2);
