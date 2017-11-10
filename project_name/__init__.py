@@ -48,7 +48,7 @@ def show_entries():
     :return: None
     """
     if 'user_id' in session:
-        return render_template('index.html')
+        return render_template('dashboard.html')
     else:
         flash('not a user')
         return redirect(url_for('login'))
