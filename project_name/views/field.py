@@ -114,7 +114,7 @@ def view(field_id):
     """
     # 查出單筆, assign給頁面
     conn = mysql.get_db()
-    sql = u"SELECT * FROM field WHERE id=%s"
+    sql = u"SELECT * FROM field WHERE field_id=%s"
     with conn.cursor() as cursor:
         cursor.execute(sql, field_id)
         field = cursor.fetchone()
@@ -154,7 +154,7 @@ def update(field_id):
     conn = mysql.get_db()
     if request.method == 'POST':
         # 依 field_id 進行 update
-        sql = u"UPDATE field SET `name`=%s, `address`=%s, `modified`=%s, `status`=%s WHERE `id`=%s"
+        sql = u"UPDATE field SET `name`=%s, `address`=%s, `modified`=%s, `status`=%s WHERE `field_id`=%s"
         print(request.form.to_dict())
         post = request.form.to_dict()
         status = 'status' in request.form
@@ -170,7 +170,7 @@ def update(field_id):
         return redirect(url_for('field.view', field_id=field_id))
     else:
         # 查出單筆, assign給頁面進行修改
-        sql = u"SELECT * FROM field WHERE id=%s"
+        sql = u"SELECT * FROM field WHERE field_id=%s"
         with conn.cursor() as cursor:
             cursor.execute(sql, field_id)
             field = cursor.fetchone()
@@ -182,7 +182,7 @@ def delete(field_id):
     """刪除某筆field資料後,回到列表頁,或著只是將status改為False
     """
     conn = mysql.get_db()
-    sql = u"DELETE FROM field WHERE `id`=%s"
+    sql = u"DELETE FROM field WHERE `field_id`=%s"
     with conn.cursor() as cursor:
         conn.begin()
         cursor.execute(sql, field_id)

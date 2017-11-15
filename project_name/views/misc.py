@@ -2,7 +2,7 @@
 from flask import request
 
 
-def items_pagebar(total, page, items):
+def items_pagebar(total, page, items, sort_col='created'):
     """
     用 mysql 的話, 可以先query一次算 total,  (然後 LIMIT 等同於 skip, 不在此使用, 預先給 sql
     :param total: total number of the result records
@@ -32,7 +32,7 @@ def items_pagebar(total, page, items):
         'last': last,
         'paging_from': paging_from,
         'paging_to': paging_to,
-        'sort': request.args.get('sort') or 'created',
+        'sort': request.args.get('sort') or sort_col,
         'asc': request.args.get('asc') or '1'
     }
     return misc

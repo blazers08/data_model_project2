@@ -1,0 +1,85 @@
+{% extends "index.html" %}
+{% block body %}
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="pull-left"><i class="fa fa-table"></i> 球隊管理 </h2>
+
+	<!-- Breadcrumb -->
+	<div class="bread-crumb pull-right">
+		<a href="{{ url_for('show_entries') }}"><i class="fa fa-home"></i> Home</a>
+		<!-- Divider -->
+		<span class="divider">/</span>
+        <a href="{{ url_for('team.simple_list') }}"><i class="fa fa-home"></i>球隊列表</a>
+	</div>
+
+	<div class="clearfix"></div>
+
+</div>
+<!-- Page heading ends -->
+
+<!-- Matter -->
+<div class="matter">
+	<div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <!-- Quick setting -->
+                <div class="widget">
+                    <div class="widget-head">
+                      <div class="pull-left">新增球隊</div>
+                      <div class="widget-icons pull-right">
+                        <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="padd">
+
+                        <div class="form quick-post">
+                            <!-- Quick setting form (not working)-->
+                            <form class="form-horizontal" role="form" action="{{ url_for('team.create') }}" method="post">
+                                <!-- Name -->
+                                <!-- Address -->
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="team_name"> 隊名</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="team_name" name="team_name" placeholder="請輸入隊名">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2"> Status</label>
+                                    <div class="col-lg-7">
+                                        <div class="sw-lblue">
+                                            <div class="onoffswitch toggleBtn">
+                                                <input name="status" id="onoffswitch1" class="toggleBtn onoffswitch-checkbox" checked="" type="checkbox">
+                                                <label class="onoffswitch-label" for="onoffswitch1">
+                                                    <span style="" class="onoffswitch-inner"></span>
+                                                    <span style="" class="onoffswitch-switch"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Buttons -->
+                                <div class="form-group">
+                                    <!-- Buttons -->
+                                    <div class="col-lg-9 col-lg-offset-2">
+                                        <button type="submit" class="btn btn-info">Save Now</button>
+                                        <button type="reset" class="btn btn-default">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        </div>
+                        <div class="widget-foot">
+                        <!-- Footer goes here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
