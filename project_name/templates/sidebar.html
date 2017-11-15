@@ -8,17 +8,14 @@
     <li ><a href="{{ url_for('field.simple_list') }}"><i class="fa fa fa-bullseye"></i> 場地管理</a></li>
     <li ><a href="{{ url_for('team.simple_list') }}"><i class="fa fa-users"></i> 球隊管理</a></li>
     <li ><a href="{{ url_for('player.list') }}"><i class="fa fa-user"></i> 球員管理</a></li>
-    <li ><a href="{{ url_for('player.list') }}"><i class="fa fa fa-futbol-o"></i> 賽事管理</a></li>
-      <!-- Sub menu markup
-      <li class="has_sub open">
-		<a href="#"><i class="fa fa-list-alt"></i> Widgets  <span class="pull-right"><i class="fa fa-chevron-right"></i></span></a>
-        <ul>
-          <li><a href="widgets1.html">Widgets #1</a></li>
-          <li><a href="widgets2.html">Widgets #2</a></li>
-          <li><a href="widgets3.html">Widgets #3</a></li>
-        </ul>
-      </li>
-      -->
+    <li>
+      <a href="{{ url_for('player.list') }}"><i class="fa fa fa-futbol-o"></i> 賽事管理</a>
+      <ul>
+        <li><a href="#">match</a></li>
+        <li><a href="#">play</a></li>
+        <li><a href="#">ball</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
 
