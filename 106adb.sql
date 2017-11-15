@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: localhost:3306
--- 產生時間： 2017 年 11 月 15 日 06:58
+-- 產生時間： 2017 年 11 月 15 日 09:49
 -- 伺服器版本: 5.6.35
 -- PHP 版本： 7.1.8
 
@@ -21,7 +21,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ball` (
-  `play_id` int(11) NOT NULL
+  `play_id` int(11) NOT NULL,
+  `ball_order` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -72,7 +73,9 @@ CREATE TABLE `match` (
 --
 
 INSERT INTO `match` (`match_id`, `field_id`, `m_hometeam`, `m_awayteam`, `m_date`) VALUES
-(1, 8, 1, 2, '2017-10-22');
+(1, 8, 1, 2, '2017-10-24'),
+(2, 8, 1, 2, '2017-10-25'),
+(3, 9, 2, 1, '2017-10-27');
 
 -- --------------------------------------------------------
 
@@ -82,7 +85,8 @@ INSERT INTO `match` (`match_id`, `field_id`, `m_hometeam`, `m_awayteam`, `m_date
 
 CREATE TABLE `play` (
   `play_id` int(11) NOT NULL,
-  `player_id` int(11) NOT NULL,
+  `pitcher_id` int(11) NOT NULL,
+  `batter_id` int(11) NOT NULL,
   `match_id` int(11) NOT NULL,
   `inning` int(11) NOT NULL,
   `half` varchar(20) NOT NULL
@@ -131,8 +135,7 @@ INSERT INTO `team` (`team_id`, `team_name`, `status`) VALUES
 (2, '休士頓太空人', 1),
 (3, '紐約洋基', 0),
 (4, '華盛頓國民', 1),
-(6, '底特律老虎', 1),
-(7, '13123', 1);
+(5, '底特律老虎', 1);
 
 -- --------------------------------------------------------
 
@@ -162,7 +165,7 @@ INSERT INTO `user` (`id`, `email`, `name`, `password`) VALUES
 -- 資料表索引 `ball`
 --
 ALTER TABLE `ball`
-  ADD PRIMARY KEY (`play_id`),
+  ADD PRIMARY KEY (`play_id`,`ball_order`),
   ADD KEY `play_id` (`play_id`);
 
 --
@@ -186,8 +189,9 @@ ALTER TABLE `match`
 --
 ALTER TABLE `play`
   ADD PRIMARY KEY (`play_id`),
-  ADD KEY `player_id` (`player_id`),
-  ADD KEY `match_id` (`match_id`);
+  ADD KEY `match_id` (`match_id`),
+  ADD KEY `batter_id` (`batter_id`),
+  ADD KEY `pitcher_id` (`pitcher_id`) USING BTREE;
 
 --
 -- 資料表索引 `player`
@@ -221,7 +225,7 @@ ALTER TABLE `field`
 -- 使用資料表 AUTO_INCREMENT `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- 使用資料表 AUTO_INCREMENT `user`
 --
@@ -249,5 +253,6 @@ ALTER TABLE `match`
 -- 資料表的 Constraints `play`
 --
 ALTER TABLE `play`
+  ADD CONSTRAINT `fk1` FOREIGN KEY (`pitcher_id`) REFERENCES `player` (`player_id`),
   ADD CONSTRAINT `play_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `match` (`match_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `play_ibfk_2` FOREIGN KEY (`player_id`) REFERENCES `player` (`player_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `play_ibfk_2` FOREIGN KEY (`batter_id`) REFERENCES `player` (`player_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
