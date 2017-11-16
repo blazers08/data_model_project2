@@ -123,7 +123,7 @@ def view(team_id):
 
 @mod.route('/create', methods=['GET', 'POST'])
 def create():
-    """新增一筆field資料
+    """新增一筆team資料
     """
     if request.method == 'POST':
         conn = mysql.get_db()
@@ -149,7 +149,7 @@ def create():
 def update(team_id):
     """修改一筆team資料
     若有post則修改後更新db
-    無post則查出field並顯示修改頁
+    無post則查出team並顯示修改頁
     """
     conn = mysql.get_db()
     if request.method == 'POST':

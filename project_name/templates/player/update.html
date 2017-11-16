@@ -1,0 +1,87 @@
+{% extends "index.html" %}
+{% block body %}
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="pull-left"><i class="fa fa-table"></i> 球員管理 </h2>
+
+	<!-- Breadcrumb -->
+	<div class="bread-crumb pull-right">
+		<a href="{{ url_for('show_entries') }}"><i class="fa fa-home"></i> Home</a>
+		<!-- Divider -->
+		<span class="divider">/</span>
+        <a href="{{ url_for('player.simple_list') }}"><i class="fa fa-home"></i>球員列表</a>
+	</div>
+
+	<div class="clearfix"></div>
+
+</div>
+<!-- Page heading ends -->
+
+<!-- Matter -->
+<div class="matter">
+	<div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <!-- Quick setting -->
+                <div class="widget">
+                    <div class="widget-head">
+                      <div class="pull-left">編修球員</div>
+                      <div class="widget-icons pull-right">
+                        <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="padd">
+
+                        <div class="form quick-post">
+                            <!-- Quick setting form (not working)-->
+                            <form class="form-horizontal" role="form" action="{{ url_for('player.update', player_id=player[0]) }}" method="post">
+                                <!-- Name -->
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="player_name"> 球員名稱</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="player_name" name="player_name" value="{{ player[1] }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="player_number"> 球員背號</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="player_number" name="player_number" value="{{ player[2] }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="player_salary"> 球員薪水</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="player_salary" name="player_salary" value="{{ player[3] }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="player_position"> 球員守備位置</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="player_position" name="player_position" value="{{ player[4] }}">
+                                    </div>
+                                </div>
+                                <!-- Buttons -->
+                                <div class="form-group">
+                                    <!-- Buttons -->
+                                    <div class="col-lg-9 col-lg-offset-2">
+                                        <button type="submit" class="btn btn-info">Save Now</button>
+                                        <button type="reset" class="btn btn-default">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        </div>
+                        <div class="widget-foot">
+                        <!-- Footer goes here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

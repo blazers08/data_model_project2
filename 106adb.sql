@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: localhost:3306
--- 產生時間： 2017 年 11 月 15 日 09:49
+-- 產生時間： 2017 年 11 月 16 日 09:28
 -- 伺服器版本: 5.6.35
 -- PHP 版本： 7.1.8
 
@@ -92,6 +92,13 @@ CREATE TABLE `play` (
   `half` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 資料表的匯出資料 `play`
+--
+
+INSERT INTO `play` (`play_id`, `pitcher_id`, `batter_id`, `match_id`, `inning`, `half`) VALUES
+(1, 1, 2, 1, 1, 'top');
+
 -- --------------------------------------------------------
 
 --
@@ -101,6 +108,7 @@ CREATE TABLE `play` (
 CREATE TABLE `player` (
   `player_id` int(11) NOT NULL,
   `player_name` varchar(50) NOT NULL,
+  `player_number` int(11) NOT NULL,
   `player_salary` int(11) NOT NULL,
   `player_position` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -109,10 +117,20 @@ CREATE TABLE `player` (
 -- 資料表的匯出資料 `player`
 --
 
-INSERT INTO `player` (`player_id`, `player_name`, `player_salary`, `player_position`) VALUES
-(1, 'Clayton Kershaw', 32000000, 'SP'),
-(2, 'José Altuve', 505700, '2B'),
-(3, 'Carlos Correa', 516700, 'SS');
+INSERT INTO `player` (`player_id`, `player_name`, `player_number`, `player_salary`, `player_position`) VALUES
+(1, 'Clayton Kershaw', 22, 32000000, 'SP'),
+(2, 'José Altuve', 0, 505700, '2B'),
+(3, 'Carlos Correa', 0, 516700, 'SS'),
+(4, 'Justin Turner', 0, 12000000, '3B'),
+(5, '前田健太', 0, 3125000, 'RP'),
+(6, '6', 0, 6, '6'),
+(7, '7', 0, 7, '7'),
+(8, '8', 0, 8, '8'),
+(9, '9', 0, 9, '9'),
+(10, '10', 0, 10, '10'),
+(11, '11', 0, 11, '11'),
+(13, 'Denny', 22, 100000000, 'SP'),
+(14, '黃家彥', 20, 20000000, 'SS');
 
 -- --------------------------------------------------------
 
@@ -135,7 +153,15 @@ INSERT INTO `team` (`team_id`, `team_name`, `status`) VALUES
 (2, '休士頓太空人', 1),
 (3, '紐約洋基', 0),
 (4, '華盛頓國民', 1),
-(5, '底特律老虎', 1);
+(5, '底特律老虎', 1),
+(6, '巴爾地摩金鶯', 1),
+(7, '辛辛那提紅人', 1),
+(8, '聖路易紅雀', 1),
+(9, '亞利桑那響尾蛇', 1),
+(10, '芝加哥小熊', 1),
+(11, '芝加哥白襪', 1),
+(12, '波士頓紅襪', 1),
+(13, '克里夫蘭印地安人', 1);
 
 -- --------------------------------------------------------
 
@@ -222,10 +248,25 @@ ALTER TABLE `user`
 ALTER TABLE `field`
   MODIFY `field_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一碼', AUTO_INCREMENT=10;
 --
+-- 使用資料表 AUTO_INCREMENT `match`
+--
+ALTER TABLE `match`
+  MODIFY `match_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- 使用資料表 AUTO_INCREMENT `play`
+--
+ALTER TABLE `play`
+  MODIFY `play_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- 使用資料表 AUTO_INCREMENT `player`
+--
+ALTER TABLE `player`
+  MODIFY `player_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
 -- 使用資料表 AUTO_INCREMENT `team`
 --
 ALTER TABLE `team`
-  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `team_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- 使用資料表 AUTO_INCREMENT `user`
 --
@@ -239,7 +280,7 @@ ALTER TABLE `user`
 -- 資料表的 Constraints `ball`
 --
 ALTER TABLE `ball`
-  ADD CONSTRAINT `ball_ibfk_1` FOREIGN KEY (`play_id`) REFERENCES `play` (`play_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ball_ibfk_1` FOREIGN KEY (`play_id`) REFERENCES `play` (`play_id`);
 
 --
 -- 資料表的 Constraints `match`
@@ -253,6 +294,6 @@ ALTER TABLE `match`
 -- 資料表的 Constraints `play`
 --
 ALTER TABLE `play`
-  ADD CONSTRAINT `fk1` FOREIGN KEY (`pitcher_id`) REFERENCES `player` (`player_id`),
-  ADD CONSTRAINT `play_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `match` (`match_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `play_ibfk_2` FOREIGN KEY (`batter_id`) REFERENCES `player` (`player_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `play_ibfk_2` FOREIGN KEY (`pitcher_id`) REFERENCES `player` (`player_id`),
+  ADD CONSTRAINT `play_ibfk_3` FOREIGN KEY (`batter_id`) REFERENCES `player` (`player_id`),
+  ADD CONSTRAINT `play_ibfk_4` FOREIGN KEY (`match_id`) REFERENCES `match` (`match_id`);
