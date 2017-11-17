@@ -33,6 +33,6 @@ def items_pagebar(total, page, items, sort_col='created'):
         'paging_from': paging_from,
         'paging_to': paging_to,
         'sort': request.args.get('sort') or sort_col,
-        'asc': request.args.get('asc') or '0'
+        'asc': request.args.get('asc') or '1'
     }
     return misc
