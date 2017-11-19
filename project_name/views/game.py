@@ -38,8 +38,10 @@ def simple_list(page=0, items=10):
             sort_condition += " DESC"
         else:  # 表示要asc
             sort_condition += " ASC"
+    else:
+        sort_condition = "ORDER BY play_id ASC"
 
-    sql2 = "SELECT * FROM play" + sort_condition
+    sql2 = "SELECT play_id, t1.player_name as pitcher_name, t2.player_name as batter_name, match_id, inning, half FROM play p INNER JOIN player t1 ON t1.player_id = p.pitcher_id INNER JOIN player t2 ON t2.player_id = p.batter_id " + sort_condition
     skip = page * items
     if skip >= total:
         skip = 0
@@ -50,7 +52,7 @@ def simple_list(page=0, items=10):
     plays = []
     with conn.cursor() as cursor:
         cursor.execute(sql2)
-        plays = cursor.fetchall()
+        plays = cursor.fetchall()      
     print(plays)
 
     misc = items_pagebar(total, page, items, 'play_id')  # 計算pagebar需要之參數
@@ -61,7 +63,7 @@ def simple_list(page=0, items=10):
 @mod.route('/search', methods=['GET', 'POST'])
 @mod.route('/search/<int:page>/<int:items>', methods=['GET', 'POST'])
 def search(page=0, items=10):
-    """加入搜尋條件的team列表
+    """加入搜尋條件的play列表
     """
     conn = mysql.get_db()
     query_condition = u""
@@ -87,8 +89,10 @@ def search(page=0, items=10):
                 sort_condition += u" DESC"
             else:
                 sort_condition += u" ASC"
-
-        sql2 = u"SELECT * FROM play" + query_condition + sort_condition
+        else:
+            sort_condition = "ORDER BY play_id ASC"
+                
+        sql2 = u"SELECT play_id, t1.player_name as pitcher_name, t2.player_name as batter_name, match_id, inning, half FROM play p INNER JOIN player t1 ON t1.player_id = p.pitcher_id INNER JOIN player t2 ON t2.player_id = p.batter_id " + query_condition + sort_condition
         skip = page * items
         if skip >= total:
             skip = 0
@@ -111,11 +115,11 @@ def search(page=0, items=10):
 
 @mod.route('/view/<play_id>')
 def view(play_id):
-    """顯示某筆field的頁面與細節
+    """顯示某筆play的頁面與細節
     """
     # 查出單筆, assign給頁面
     conn = mysql.get_db()
-    sql = u"SELECT * FROM play WHERE play_id=%s"
+    sql = u"SELECT play_id, t1.player_name as pitcher_name, t2.player_name as batter_name, match_id, inning, half FROM play p INNER JOIN player t1 ON t1.player_id = p.pitcher_id INNER JOIN player t2 ON t2.player_id = p.batter_id WHERE p.play_id = %s"
     with conn.cursor() as cursor:
         cursor.execute(sql, play_id)
         play = cursor.fetchone()
@@ -124,24 +128,25 @@ def view(play_id):
 
 @mod.route('/create', methods=['GET', 'POST'])
 def create():
-    """新增一筆player資料
+    """新增一筆play資料
     """
     if request.method == 'POST':
         conn = mysql.get_db()
-        # 實際寫入一筆
-        sql = u"INSERT INTO `play` (`player_name`, `player_number`, `player_salary`, `player_position`) VALUES (%s, %s, %s, %s)"
+        # 實際寫入一筆 t1.player_name as pitcher_name, t2.player_name as batter_name,
+        sql = u"INSERT INTO `play` (`pitcher_id`, `batter_id`, `match_id`, `inning`, `half`) VALUES (%s, %s, %s, %s, %s)"
         print(request.form.to_dict())
         post = request.form.to_dict()
         print(post)
         status = 'status' in request.form
         with conn.cursor() as cursor:
             conn.begin()
-            cursor.execute(sql, (post['player_name'],
-                                post['player_number'],
-                                post['player_salary'],
-                                post['player_position'])
+            cursor.execute(sql, (post['pitcher_id'],
+                                post['batter_id'],
+                                post['match_id'],
+                                post['inning'],
+                                post['half'])
                            )
-            player_id = cursor.lastrowid
+            play_id = cursor.lastrowid
             conn.commit()
         return redirect(url_for('play.view', play_id=play_id))
     else:
@@ -150,24 +155,25 @@ def create():
 
 @mod.route('/update/<play_id>', methods=['GET', 'POST'])
 def update(play_id):
-    """修改一筆player資料
+    """修改一筆play資料
     若有post則修改後更新db
     無post則查出player並顯示修改頁
     """
     conn = mysql.get_db()
     if request.method == 'POST':
-        # 依 team_id 進行 update
-        sql = u"UPDATE play SET `player_name`=%s, `player_number`=%s, `player_salary`=%s, `player_position`=%s WHERE `player_id`=%s"
+        # 依 play_id 進行 update
+        sql = u"UPDATE play SET `pitcher_id`=%s, `batter_id`=%s, `match_id`=%s, `inning`=%s, `half`=%s WHERE `play_id`=%s"
         print(request.form.to_dict())
         post = request.form.to_dict()
         status = 'status' in request.form
         with conn.cursor() as cursor:
             conn.begin()
-            cursor.execute(sql, (post['player_name'],
-                                post['player_number'],
-                                post['player_salary'],
-                                post['player_position'],                      
-                                player_id)
+            cursor.execute(sql, (post['pitcher_id'],
+                                post['batter_id'],
+                                post['match_id'],
+                                post['inning'],
+                                post['half'],                      
+                                play_id)
                            )
             conn.commit()
         return redirect(url_for('play.view', play_id=play_id))
@@ -182,7 +188,7 @@ def update(play_id):
 
 @mod.route('/delete/<play_id>', methods=['GET', 'POST'])
 def delete(play_id):
-    """刪除某筆field資料後,回到列表頁,或著只是將status改為False
+    """刪除某筆play資料後,回到列表頁
     """
     conn = mysql.get_db()
     sql = u"DELETE FROM play WHERE `play_id`=%s"
