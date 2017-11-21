@@ -18,44 +18,32 @@
 }
 </style>
 <head>
-    <!--Load the AJAX API-->
+  <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+    // Load the Visualization API and the piechart package.
+    google.charts.load('current', {'packages':['corechart']});
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
-
-        // Create the data table.
-        var data = google.visualization.arrayToDataTable([
-        ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
-         'Western', 'Literature', { role: 'annotation' } ],
-        ['2010', 10, 24, 20, 32, 18, 5, ''],
-        ['2020', 16, 22, 23, 30, 16, 9, ''],
-        ['2030', 28, 19, 29, 30, 12, 13, '']
-      ]);
-
-        var options = {
-          width: 800,
-          height: 400,
-          legend: { position: 'top', maxLines: 3 },
-          bar: { groupWidth: '30%' },
-          isStacked: true,
-          // series: {
-          //   0:{color:'#222'},
-          //   1:{color:'#555'},
-          //   2:{color:'#888'},
-          //   3:{color:'#AAA'},
-          //   4:{color:'#EEE'}
-          // }
-        };
+    function drawChart() {
+      var jsonData = $.ajax({
+          url: "http://127.0.0.1:5000/analysis/pitcher_recent/" + $('#select_player').val(),
+          dataType: "json",
+          async: false
+        }).responseJSON;
+        console.log(jsonData);
+      // Create our data table out of JSON data loaded from server.
+      var data = google.visualization.arrayToDataTable(jsonData);
+      var options = {
+        width: 800,
+        height: 400,
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: '30%' },
+        isStacked: true,
+      };
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(data, options);
@@ -122,6 +110,14 @@
               </div>
             </li>
           </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+            <select id="select_player">
+              <option>9</option>
+              <option>9</option>
+            </select>
         </div>
       </div>
       <div class="row">
