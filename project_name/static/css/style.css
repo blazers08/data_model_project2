@@ -780,7 +780,7 @@ header .header-data .hdata em{
 	margin-right: 0px;
 	margin-top: 10px;
 	width: auto;
-	/*background:#eee url("../img/main-back.png") repeat;*/
+	background:#eee url("../img/main-back.png") repeat;
 	background-color: gainsboro;
 	border-left: 1px solid #ccc;
 	z-index: 50;
