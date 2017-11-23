@@ -48,7 +48,13 @@ def show_entries():
     :return: None
     """
     if 'user_id' in session:
-        return render_template('dashboard.html')
+        conn = mysql.get_db()
+        sql = u"SELECT * FROM player WHERE player_position='P'"
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            pitchers = cursor.fetchall()
+        print(pitchers)
+        return render_template('dashboard.html', pitchers=pitchers)
     else:
         flash('not a user')
         return redirect(url_for('login'))

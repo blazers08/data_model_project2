@@ -29,6 +29,7 @@
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
+      console.log($('#select_player').val())
       var jsonData = $.ajax({
           url: "http://127.0.0.1:5000/analysis/pitcher_recent/" + $('#select_player').val(),
           dataType: "json",
@@ -115,8 +116,9 @@
       <div class="row">
         <div class="col-md-8">
             <select id="select_player" onchange="drawChart()">
-              <option>9</option>
-              <option>8</option>
+              {% for player in pitchers %}
+              <option value="{{ player[0] }}">{{ player[1] }}</option>
+              {% endfor %}
             </select>
         </div>
       </div>
