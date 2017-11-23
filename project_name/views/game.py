@@ -123,7 +123,12 @@ def view(play_id):
     with conn.cursor() as cursor:
         cursor.execute(sql, play_id)
         play = cursor.fetchone()
-    return render_template('play/view.html', play=play)
+
+    sql = u"SELECT ball.play_id, `ball_order`, `kind`, `speed`, `result` FROM play, ball WHERE ball.play_id=%s and play.play_id=ball.play_id "
+    with conn.cursor() as cursor:
+        cursor.execute(sql, play_id)
+        balls = cursor.fetchall()
+    return render_template('play/view.html', play=play, balls=balls)
 
 
 @mod.route('/create', methods=['GET', 'POST'])

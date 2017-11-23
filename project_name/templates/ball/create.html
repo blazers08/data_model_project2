@@ -1,0 +1,116 @@
+{% extends "index.html" %}
+{% block body %}
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="pull-left"><i class="fa fa-table"></i> 打席管理 </h2>
+
+	<!-- Breadcrumb -->
+	<div class="bread-crumb pull-right">
+		<a href="{{ url_for('show_entries') }}"><i class="fa fa-home"></i> Home</a>
+		<!-- Divider -->
+		<span class="divider">/</span>
+        <a href="{{ url_for('play.simple_list') }}"><i class="fa fa-home"></i>打席列表</a>
+	</div>
+
+	<div class="clearfix"></div>
+
+</div>
+<!-- Page heading ends -->
+
+<!-- Matter -->
+<div class="matter">
+	<div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <!-- Quick setting -->
+                <div class="widget">
+                    <div class="widget-head">
+                      <div class="pull-left">新增球</div>
+                      <div class="widget-icons pull-right">
+                        <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="padd">
+
+                        <div class="form quick-post">
+                            <!-- Quick setting form (not working)-->
+                            <form class="form-horizontal" role="form" action="{{ url_for('ball.create', play_id=play_id) }}" method="post">
+                                <!-- Name -->
+                                <!-- Address -->
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="ball_order"> 第幾球</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="ball_order" name="ball_order" placeholder="請輸入第幾球">
+                                    </div>
+                                </div>                       
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="kind"> 球種</label>
+                                    <div class="col-md-7">
+                                        <select id="ball[2]" name="kind" aria-controls="data-table-2">
+                                            <option value="4FB">4FB</option>
+                                            <option value="2FB">2FB</option>
+                                            <option value="CUT">CUT</option>
+                                            <option value="SLD">SLD</option>
+                                            <option value="SNK">SNK</option>
+                                            <option value="CHG">CHG</option>
+                                            <option value="SPL">SPL</option>
+                                            <option value="CRV">CRV</option>
+                                            <option value="KNU">KNU</option>
+                                            <option value="KCV">KCV</option>
+                                            <option value="SLV">SLV</option>
+                                            <option value="PLM">PLM</option>
+                                            <option value="CCH">CCH</option>
+                                            <option value="FRK">FRK</option>
+                                            <option value="SCR">SCR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="speed"> 球速</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="speed" name="speed" placeholder="請輸入球速">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="result"> 結果</label>
+                                    <div class="col-md-7">
+                                        <select id="ball[5]" name="result" aria-controls="data-table-2">
+                                            <option value="S">S</option>
+                                            <option value="B">B</option>
+                                            <option value="f_ball">f_ball</option>
+                                            <option value="1h">1h</option>
+                                            <option value="2h">2h</option>
+                                            <option value="3h">3h</option>
+                                            <option value="HR">HR</option>
+                                            <option value="K">K</option>
+                                            <option value="out">out</option>
+                                            <option value="BB">BB</option>
+                                            <option value="HBP">HBP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Buttons -->
+                                <div class="form-group">
+                                    <!-- Buttons -->
+                                    <div class="col-lg-9 col-lg-offset-2">
+                                        <button type="submit" class="btn btn-info">Save Now</button>
+                                        <button type="reset" class="btn btn-default">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        </div>
+                        <div class="widget-foot">
+                        <!-- Footer goes here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

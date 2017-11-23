@@ -75,6 +75,42 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="sorting" id="play_id" onclick="resort(this)">打席ID</th>
+                                        <th class="sorting" id="ball_order" onclick="resort(this)">第幾球</th>
+                                        <th class="sorting" id="kind" onclick="resort(this)">球種</th>
+                                        <th class="sorting" id="spped" onclick="resort(this)">球速</th>
+                                        <th class="sorting" id="result" onclick="resort(this)">結果</th>
+                                        <th>Control</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                        {% for ball in balls %}
+                                            <tr>
+                                                <td>{{ ball[0] }}</td>
+                                                <td>{{ ball[1] }}</td>
+                                                <td>{{ ball[2] }}</td>
+                                                <td>{{ ball[3] }}</td>
+                                                <td>{{ ball[4] }}</td>
+                                                <td>
+                                                    <a href="{{ url_for('ball.create', play_id=play[0]) }}">
+                                                        <button type="button" class="btn btn-sm btn-primary">
+                                                            <i class="fa fa-plus"></i>新增球
+                                                        </button>
+                                                    </a>
+                                                    <a href="{{ url_for('ball.update', play_id=ball[0], ball_order=ball[1]) }}">
+                                                        <button class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> </button>
+                                                    </a>
+                                                    <a href="{{ url_for('ball.delete', play_id=ball[0], ball_order=ball[1]) }}">
+                                                        <button class="btn btn-xs btn-danger"><i class="fa fa-times"></i> </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                            </table>
                         </div>
                         <div class="widget-foot"></div>
                     </div>
