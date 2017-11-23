@@ -16,6 +16,24 @@
 .iconButton div:hover {
   color: gray;
 }
+.selectArea {
+  display: flex;
+  padding: 5px;
+}
+.selectTitle {
+  font-size: 20px;
+  width: 800px;
+  text-align: center;
+  padding: 12px;
+}
+.selectFont {
+  font-size: 13px;
+  letter-spacing: 2px;
+  justify-content:flex-end;
+}
+.chart {
+  text-align: center;
+}
 </style>
 <head>
   <!--Load the AJAX API-->
@@ -114,17 +132,21 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8">
-            <select id="select_player" onchange="drawChart()">
-              {% for player in pitchers %}
-              <option value="{{ player[0] }}">{{ player[1] }}</option>
-              {% endfor %}
-            </select>
+        <div class="col-md-12">
+          <h1 class="selectTitle">投手近況表現</h1>
+          <div class="selectArea">
+            <p class="selectFont">投手選擇：</p>
+              <select id="select_player" onchange="drawChart()">
+                {% for player in pitchers %}
+                <option value="{{ player[0] }}">{{ player[1] }}</option>
+                {% endfor %}
+              </select>
+          </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8">
-            <div id="chart_div"></div>
+        <div class="col-md-12">
+            <div class="chart" id="chart_div"></div>
         </div>
       </div>
     </div>
