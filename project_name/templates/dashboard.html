@@ -49,7 +49,7 @@
     function drawChart() {
       console.log($('#select_player').val())
       var jsonData = $.ajax({
-          url: "http://127.0.0.1:5000/analysis/pitcher_recent/" + $('#select_player').val(),
+          url: "{{ url_for('analysis.pitcher_recent', player_id='') }}" + $('#select_player').val(),
           dataType: "json",
           async: false
         }).responseJSON;
