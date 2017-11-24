@@ -144,7 +144,16 @@ def create():
             conn.commit()
         return redirect(url_for('match.view', match_id=match_id))
     else:
-        return render_template('match/create.html')
+        conn = mysql.get_db()
+        sql = u"SELECT * FROM `field`"
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            fields = cursor.fetchall()
+        sql = u"SELECT * FROM team"
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            teams = cursor.fetchall()
+        return render_template('match/create.html', fields=fields, teams=teams)
 
 
 @mod.route('/update/<match_id>', methods=['GET', 'POST'])
@@ -176,7 +185,15 @@ def update(match_id):
         with conn.cursor() as cursor:
             cursor.execute(sql, match_id)
             match = cursor.fetchone()
-        return render_template('match/update.html', match=match)
+        sql = u"SELECT * FROM `field`"
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            fields = cursor.fetchall()
+        sql = u"SELECT * FROM team"
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            teams = cursor.fetchall()
+        return render_template('match/update.html', match=match, fields=fields, teams=teams)
 
 
 @mod.route('/delete/<match_id>', methods=['GET', 'POST'])

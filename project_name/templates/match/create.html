@@ -42,25 +42,40 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="field_id"> 場地</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="field_id" name="field_id" placeholder="請輸入場地名稱">
+                                        <select id="field_id" class="select2" name="field_id" aria-controls="data-table-2">
+                                            {% for field in fields %}
+                                            <option value="{{ field[0] }}">{{ field[1] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="field_id" name="field_id" placeholder="請輸入場地名稱">-->
                                     </div>
                                 </div>
                                 <!-- Address -->
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="m_hometeam"> 主場球隊</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="m_hometeam" name="m_hometeam" placeholder="請輸入主場球隊">
+                                        <select id="m_hometeam" class="select2" name="m_hometeam" aria-controls="data-table-2">
+                                            {% for team in teams %}
+                                            <option value="{{ team[0] }}">{{ team[1] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="m_hometeam" name="m_hometeam" placeholder="請輸入主場球隊">-->
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="m_awayteam"> 客場球隊</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="m_awayteam" name="m_awayteam" placeholder="請輸入客場球隊">
+                                        <select id="m_awayteam" class="select2" name="m_awayteam" aria-controls="data-table-2">
+                                            {% for team in teams %}
+                                            <option value="{{ team[0] }}">{{ team[1] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="m_awayteam" name="m_awayteam" placeholder="請輸入客場球隊">-->
                                     </div>
                                 </div><div class="form-group">
                                     <label class="control-label col-md-2" for="m_date"> 比賽日期</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="m_date" name="m_date" placeholder="請輸入比賽日期">
+                                        <input type="date" class="form-control" id="m_date" name="m_date" placeholder="請輸入比賽日期">
                                     </div>
                                 </div>
                                 <!-- Buttons -->
