@@ -407,5 +407,5 @@ function sort_table_style(id,current_sort) {
     return;
 }
 $(document).ready(function() {
-    $('.select2').select2({ width: '100%' });
+    $('.select2').select2({ width: '60%' });
 });
