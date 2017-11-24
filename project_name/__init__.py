@@ -111,13 +111,14 @@ def nl2br(eval_ctx, value):
     return result
 
 
-from project_name.views import player, team, game, field, analysis, ball
+from project_name.views import player, team, game, field, analysis, ball, match
 app.register_blueprint(player.mod, url_prefix='/player')
 app.register_blueprint(team.mod, url_prefix='/team')
 app.register_blueprint(game.mod, url_prefix='/game')
 app.register_blueprint(field.mod, url_prefix='/field')
 app.register_blueprint(analysis.mod, url_prefix='/analysis')
 app.register_blueprint(ball.mod, url_prefix='/ball')
+app.register_blueprint(match.mod, url_prefix='/match')
 
 
 if __name__ == '__main__':

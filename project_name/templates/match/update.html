@@ -1,0 +1,88 @@
+{% extends "index.html" %}
+{% block body %}
+<!-- Page heading -->
+<div class="page-head">
+	<h2 class="pull-left"><i class="fa fa-table"></i> 賽事管理 </h2>
+
+	<!-- Breadcrumb -->
+	<div class="bread-crumb pull-right">
+		<a href="{{ url_for('show_entries') }}"><i class="fa fa-home"></i> Home</a>
+		<!-- Divider -->
+		<span class="divider">/</span>
+        <a href="{{ url_for('match.simple_list') }}"><i class="fa fa-home"></i>賽事列表</a>
+	</div>
+
+	<div class="clearfix"></div>
+
+</div>
+<!-- Page heading ends -->
+
+<!-- Matter -->
+<div class="matter">
+	<div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <!-- Quick setting -->
+                <div class="widget">
+                    <div class="widget-head">
+                      <div class="pull-left">編修賽事</div>
+                      <div class="widget-icons pull-right">
+                        <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="padd">
+
+                        <div class="form quick-post">
+                            <!-- Quick setting form (not working)-->
+                            <form class="form-horizontal" role="form" action="{{ url_for('match.update', match_id=match[0]) }}" method="post">
+                                <!-- Name -->
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="field_id"> 場地</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="fieldname" name="name" value="{{ match[1] }}">
+                                    </div>
+                                </div>
+                                <!-- ADdress -->
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="m_hometeam"> 主場</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="fieldaddress" name="address" value="{{ match[2] }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="m_awayteam"> 客場</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="fieldaddress" name="address" value="{{ match[3] }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="m_date"> 比賽日期</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="fieldaddress" name="address" value="{{ match[4] }}">
+                                    </div>
+                                </div>
+                                <!-- Buttons -->
+                                <div class="form-group">
+                                    <!-- Buttons -->
+                                    <div class="col-lg-9 col-lg-offset-2">
+                                        <button type="submit" class="btn btn-info">Save Now</button>
+                                        <button type="reset" class="btn btn-default">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        </div>
+                        <div class="widget-foot">
+                        <!-- Footer goes here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
