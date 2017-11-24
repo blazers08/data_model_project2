@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.3
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- 主機: localhost:3306
--- 產生時間： 2017 年 11 月 18 日 18:22
--- 伺服器版本: 5.6.35
--- PHP 版本： 7.1.8
+-- 主機: localhost:3310
+-- 產生時間： 2017-11-24 13:47:36
+-- 伺服器版本: 5.6.34-log
+-- PHP 版本： 7.1.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -271,14 +273,19 @@ CREATE TABLE `field` (
 --
 
 INSERT INTO `field` (`field_id`, `name`, `address`, `created`, `modified`, `status`) VALUES
-(1, '天母棒球場', '忠誠路', '2017-09-29 12:57:54', '2017-11-14 16:17:43', 1),
-(3, '政大', '指南路', '2017-09-29 14:42:45', '2017-09-29 14:42:45', 1),
-(4, '桃園', '中壢', '2017-11-11 19:51:48', '2017-11-11 19:51:48', 1),
-(5, '新莊', '新北市新莊區', '2017-11-11 19:53:00', '2017-11-11 20:00:48', 1),
-(6, '洲際', '台中', '2017-11-11 20:00:22', '2017-11-11 20:00:22', 1),
-(7, '澄清湖', '高雄市ＸＸ區', '2017-11-11 20:04:58', '2017-11-11 20:05:10', 1),
-(8, 'Dodger Stadium', '1000 Vin Scully Ave, Los Angeles, CA, USA', '2017-11-11 23:19:59', '2017-11-11 23:19:59', 1),
-(9, 'Minute Maid Park', '501 Crawford ST, Huston, TX, USA', '2017-11-12 22:45:57', '2017-11-12 22:45:57', 1);
+(8, 'Dodger Stadium', '1000 Vin Scully Ave, Los Angeles, CA, USA', '2017-11-11 23:19:59', '2017-11-24 21:41:01', 1),
+(9, 'Minute Maid Park', '501 Crawford ST, Huston, TX, USA', '2017-11-12 22:45:57', '2017-11-12 22:45:57', 1),
+(10, 'Yankee Stadium', 'One E 161st St Bronx, NY, USA', '2017-11-24 21:34:01', '2017-11-24 21:34:01', 1),
+(11, 'Nationals Park', '1500 South Capitol St., SE Washington, DC USA', '2017-11-24 21:35:27', '2017-11-24 21:35:27', 1),
+(12, 'Comerica Park', ' 2100 Woodward Ave, Detroit, MI, USA', '2017-11-24 21:37:21', '2017-11-24 21:37:21', 1),
+(13, 'Oriole Park', '333 W Camden St, Baltimore, MD, USA', '2017-11-24 21:38:17', '2017-11-24 21:38:17', 1),
+(14, 'Great American Ballpark', '100 Joe Nuxhall Way, Cincinnati, OH, USA', '2017-11-24 21:39:14', '2017-11-24 21:39:14', 1),
+(15, 'Busch Stadium', '700 Clark Ave, St. Louis, MO, USA', '2017-11-24 21:39:53', '2017-11-24 21:39:53', 1),
+(16, 'Chase Field', '401 E Jefferson St, Phoenix, AZ, USA', '2017-11-24 21:40:46', '2017-11-24 21:40:53', 1),
+(17, 'Wrigley Field', '1060 W Addison St, Chicago, IL, USA', '2017-11-24 21:41:43', '2017-11-24 21:41:43', 1),
+(18, 'U.S. Cellular Field', '333 W 35th St, Chicago, IL, USA', '2017-11-24 21:42:37', '2017-11-24 21:42:37', 1),
+(19, 'Fenway Park', '4 Yawkey Way, Boston, MA, USA', '2017-11-24 21:43:13', '2017-11-24 21:43:13', 1),
+(20, 'Progressive Field', '2401 Ontario St, Cleveland, OH, USA', '2017-11-24 21:44:07', '2017-11-24 21:44:07', 1);
 
 -- --------------------------------------------------------
 
@@ -450,7 +457,7 @@ INSERT INTO `team` (`team_id`, `team_name`, `status`) VALUES
 (4, '華盛頓國民', 1),
 (5, '底特律老虎', 1),
 (6, '巴爾地摩金鶯', 1),
-(7, '辛辛那提紅人', 1),
+(7, '辛辛那提紅人', 0),
 (8, '聖路易紅雀', 1),
 (9, '亞利桑那響尾蛇', 1),
 (10, '芝加哥小熊', 1),
@@ -541,7 +548,7 @@ ALTER TABLE `user`
 -- 使用資料表 AUTO_INCREMENT `field`
 --
 ALTER TABLE `field`
-  MODIFY `field_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一碼', AUTO_INCREMENT=10;
+  MODIFY `field_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一碼', AUTO_INCREMENT=21;
 --
 -- 使用資料表 AUTO_INCREMENT `match`
 --
@@ -592,6 +599,7 @@ ALTER TABLE `play`
   ADD CONSTRAINT `play_ibfk_2` FOREIGN KEY (`pitcher_id`) REFERENCES `player` (`player_id`),
   ADD CONSTRAINT `play_ibfk_3` FOREIGN KEY (`batter_id`) REFERENCES `player` (`player_id`),
   ADD CONSTRAINT `play_ibfk_4` FOREIGN KEY (`match_id`) REFERENCES `match` (`match_id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
