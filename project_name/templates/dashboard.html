@@ -136,7 +136,7 @@
           <h1 class="selectTitle">投手近況表現</h1>
           <div class="selectArea">
             <p class="selectFont">投手選擇：</p>
-              <select id="select_player" onchange="drawChart()">
+              <select id="select_player" class="select2" onchange="drawChart()">
                 {% for player in pitchers %}
                 <option value="{{ player[0] }}">{{ player[1] }}</option>
                 {% endfor %}

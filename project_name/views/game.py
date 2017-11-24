@@ -41,7 +41,11 @@ def simple_list(page=0, items=10):
     else:
         sort_condition = "ORDER BY play_id ASC"
 
-    sql2 = "SELECT play_id, t1.player_name as pitcher_name, t2.player_name as batter_name, match_id, inning, half FROM play p INNER JOIN player t1 ON t1.player_id = p.pitcher_id INNER JOIN player t2 ON t2.player_id = p.batter_id " + sort_condition
+    sql2 = "SELECT play_id, t1.player_name as pitcher_name, t2.player_name as batter_name, p.match_id, inning, half, M.m_date, F.name " \
+           "FROM play p INNER JOIN player t1 ON t1.player_id = p.pitcher_id " \
+           "INNER JOIN player t2 ON t2.player_id = p.batter_id " \
+           "JOIN `match` AS M ON p.match_id = M.match_id " \
+           "JOIN `field` AS F ON M.field_id = F.field_id " + sort_condition
     skip = page * items
     if skip >= total:
         skip = 0
@@ -119,7 +123,12 @@ def view(play_id):
     """
     # 查出單筆, assign給頁面
     conn = mysql.get_db()
-    sql = u"SELECT play_id, t1.player_name as pitcher_name, t2.player_name as batter_name, match_id, inning, half FROM play p INNER JOIN player t1 ON t1.player_id = p.pitcher_id INNER JOIN player t2 ON t2.player_id = p.batter_id WHERE p.play_id = %s"
+    sql = u"SELECT play_id, t1.player_name as pitcher_name, t2.player_name as batter_name, p.match_id, inning, half, M.m_date, F.name " \
+          u"FROM play p INNER JOIN player t1 ON t1.player_id = p.pitcher_id " \
+          u"INNER JOIN player t2 ON t2.player_id = p.batter_id " \
+          u"JOIN `match` AS M ON p.match_id = M.match_id " \
+          u"JOIN `field` AS F ON M.field_id = F.field_id " \
+          u"WHERE p.play_id = %s"
     with conn.cursor() as cursor:
         cursor.execute(sql, play_id)
         play = cursor.fetchone()
@@ -155,7 +164,20 @@ def create():
             conn.commit()
         return redirect(url_for('play.view', play_id=play_id))
     else:
-        return render_template('play/create.html')
+        conn = mysql.get_db()
+        sql = u"SELECT match_id, m_date, field.name FROM `match` JOIN `field` ON match.field_id=field.field_id"
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            matches = cursor.fetchall()
+        sql = u"SELECT * FROM player WHERE player_position='P'"
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            pitchers = cursor.fetchall()
+        sql = u"SELECT * FROM player"
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            batters = cursor.fetchall()
+        return render_template('play/create.html', matches=matches, pitchers=pitchers, batters=batters)
 
 
 @mod.route('/update/<play_id>', methods=['GET', 'POST'])
@@ -188,7 +210,20 @@ def update(play_id):
         with conn.cursor() as cursor:
             cursor.execute(sql, play_id)
             play = cursor.fetchone()
-        return render_template('play/update.html', play=play)
+        conn = mysql.get_db()
+        sql = u"SELECT match_id, m_date, field.name FROM `match` JOIN `field` ON match.field_id=field.field_id"
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            matches = cursor.fetchall()
+        sql = u"SELECT * FROM player WHERE player_position='P'"
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            pitchers = cursor.fetchall()
+        sql = u"SELECT * FROM player"
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            batters = cursor.fetchall()
+        return render_template('play/update.html', play=play, matches=matches, pitchers=pitchers, batters=batters)
 
 
 @mod.route('/delete/<play_id>', methods=['GET', 'POST'])

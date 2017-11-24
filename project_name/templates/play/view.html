@@ -52,7 +52,7 @@
                                     </tr>
                                     <tr>
                                         <td>比賽場次</td>
-                                        <td>{{ play[3] }}</td>
+                                        <td>match:{{ play[3] }} on {{play[6]}} @ {{play[7]}}</td>
                                     </tr>
                                     <tr>
                                         <td>第幾局</td>
@@ -60,7 +60,13 @@
                                     </tr>
                                     <tr>
                                         <td>上下半場</td>
-                                        <td>{{ play[5] }}</td>
+                                        <td>
+                                            {% if play[5] == 'TOP'%}
+                                            上半場
+                                            {% else %}
+                                            下半場
+                                            {% endif%}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Control</td>
