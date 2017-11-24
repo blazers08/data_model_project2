@@ -369,41 +369,43 @@
 // });
 //
 //
-// /*
-//     sort table on field with sort
-// */
-// function sort_table(url, field, sort, items, page) {
-//     var loc=url + '/' + page + '/'+ items + '?sort=' + field + '&asc='+ sort;
-//     document.location=loc;
-//     return;
-// }
-//
-// /*
-//     sort table on field with opposite value of current_sort
-// */
-// function rsort_table(url, field, current_sort, items, page) {
-//     var reverse_sort = 1;
-//     if(current_sort == 1)
-//         reverse_sort = 0;
-//     sort_table(url, field, reverse_sort, items, page);
-//     return;
-// }
-//
-// /*
-//     change style of dynamic table's thead.th
-// */
-// function sort_table_style(id,current_sort) {
-//     var elem;
-//     if(document.getElementById) {
-//         elem = document.getElementById(id);
-//     } else if (document.all){
-//         elem = document.all[id];
-//     }
-//
-//     if(current_sort==1){
-//         elem.className = "sorting_asc";
-//     }else{
-//         elem.className = "sorting_desc";
-//     }
-//     return;
-// }
+ /*
+     sort table on field with sort
+ */
+function sort_table(url, field, sort, items, page) {
+    var loc=url + '/' + page + '/'+ items + '?sort=' + field + '&asc='+ sort;
+    document.location=loc;
+    return;
+}
+
+ /*
+     sort table on field with opposite value of current_sort
+ */
+function rsort_table(url, field, current_sort, items, page) {
+    var reverse_sort = 1;
+    if(current_sort == 1)
+        reverse_sort = 0;
+    sort_table(url, field, reverse_sort, items, page);
+    return;
+}
+
+/*
+    change style of dynamic table's thead.th
+*/
+function sort_table_style(id,current_sort) {
+    var elem;
+    if(document.getElementById) {
+        elem = document.getElementById(id);
+    } else if (document.all){
+        elem = document.all[id];
+    }
+     if(current_sort==1){
+        elem.className = "sorting_asc";
+    }else{
+        elem.className = "sorting_desc";
+    }
+    return;
+}
+$(document).ready(function() {
+    $('.select2').select2({ width: '60%' });
+});

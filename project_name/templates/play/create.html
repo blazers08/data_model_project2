@@ -43,34 +43,62 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="pitcher_id"> 投手ID</label>
                                     <div class="col-md-7">
-                                        <!-- <select id="row[0]" name="pitcher_id" aria-controls="data-table-2">
-                                            <option value={player_id}>{player_name}</option>
-                                        </select> -->
-                                        <input type="text" class="form-control" id="pitcher_id" name="pitcher_id" placeholder="請輸入投手">
+                                        <select id="pitcher_id" class="select2" name="pitcher_id" aria-controls="data-table-2">
+                                            {% for player in pitchers %}
+                                            <option value="{{ player[0] }}">{{ player[1] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <!-- <input type="text" class="form-control" id="pitcher_id" name="pitcher_id" placeholder="請輸入投手"> -->
                                     </div>
                                 </div>                             
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="batter_id"> 打者ID</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="batter_id" name="batter_id" placeholder="請輸入打者">
+                                        <select id="batter_id" class="select2" name="batter_id" aria-controls="data-table-3">
+                                            {% for player in batters %}
+                                            <option value="{{ player[0] }}">{{ player[1] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="batter_id" name="batter_id" placeholder="請輸入打者">-->
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="match_id"> 比賽場次</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="match_id" name="match_id" placeholder="請輸入場次">
+                                        <select id="match_id" class="select2" name="match_id" aria-controls="data-table-2">
+                                            {% for match in matches %}
+                                            <option value="{{ match[0] }}">{{ match[1] }} @ {{ match[2] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="match_id" name="match_id" placeholder="請輸入場次">-->
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="inning"> 第幾局</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="inning" name="inning" placeholder="請輸入第幾局">
+                                        <select id="inning" class="select2" name="inning" aria-controls="data-table-2">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">延長</option>
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="inning" name="inning" placeholder="請輸入第幾局">-->
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="half"> 上下半場</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="half" name="half" placeholder="請輸入上下半場">
+                                        <select id="half" class="select2" name="half" aria-controls="data-table-2">
+                                            <option value="TOP">上半場</option>
+                                            <option value="BOT">下半場</option>
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="half" name="half" placeholder="請輸入上下半場">-->
                                     </div>
                                 </div>
                                 <!-- Buttons -->

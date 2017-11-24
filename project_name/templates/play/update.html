@@ -42,31 +42,68 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="pitcher_id"> 投手名稱</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="pitcher_id" name="pitcher_id" value="{{ play[1] }}">
+                                        <select id="pitcher_id" class="select2" name="pitcher_id" aria-controls="data-table-2">
+                                            {% for player in pitchers %}
+                                            <option value="{{ player[0] }}" {% if player[0] == play[1]%}selected{%endif%}>
+                                                {{ player[1] }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="pitcher_id" name="pitcher_id" value="{{ play[1] }}">-->
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="batter_id"> 打者名稱</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="batter_id" name="batter_id" value="{{ play[2] }}">
+                                        <select id="batter_id" class="select2" name="batter_id" aria-controls="data-table-3">
+                                            {% for player in batters %}
+                                            <option value="{{ player[0] }}" {% if player[0] == play[2]%}selected{%endif%}>
+                                                {{ player[1] }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="batter_id" name="batter_id" value="{{ play[2] }}">-->
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="match_id"> 比賽場次</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="match_id" name="match_id" value="{{ play[3] }}">
+                                        <select id="match_id" class="select2" name="match_id" aria-controls="data-table-2">
+                                            {% for match in matches %}
+                                            <option value="{{ match[0] }}" {% if match[0] == play[3]%}selected{%endif%}>
+                                                {{ match[1] }} @ {{ match[2] }}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="match_id" name="match_id" value="{{ play[3] }}">-->
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="inning"> 第幾局</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="inning" name="inning" value="{{ play[4] }}">
+                                        <select id="inning" class="select2" name="inning" aria-controls="data-table-2">
+                                            <option value="1" {% if play[4]==1%}selected{%endif%}>1</option>
+                                            <option value="2" {% if play[4]==2%}selected{%endif%}>2</option>
+                                            <option value="3" {% if play[4]==3%}selected{%endif%}>3</option>
+                                            <option value="4" {% if play[4]==4%}selected{%endif%}>4</option>
+                                            <option value="5" {% if play[4]==5%}selected{%endif%}>5</option>
+                                            <option value="6" {% if play[4]==6%}selected{%endif%}>6</option>
+                                            <option value="7" {% if play[4]==7%}selected{%endif%}>7</option>
+                                            <option value="8" {% if play[4]==8%}selected{%endif%}>8</option>
+                                            <option value="9" {% if play[4]==9%}selected{%endif%}>9</option>
+                                            <option value="10" {% if play[4]==10%}selected{%endif%}>延長</option>
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="inning" name="inning" value="{{ play[4] }}">-->
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="half"> 上下半場</label>
                                     <div class="col-md-7">
-                                        <input type="text" class="form-control" id="half" name="half" value="{{ play[5] }}">
+                                        <select id="half" class="select2" name="half" aria-controls="data-table-2">
+                                            <option value="TOP" {% if play[5]=='TOP'%}selected{%endif%}>上半場</option>
+                                            <option value="BOT" {% if play[5]=='BOT'%}selected{%endif%}>下半場</option>
+                                        </select>
+                                        <!--<input type="text" class="form-control" id="half" name="half" value="{{ play[5] }}">-->
                                     </div>
                                 </div>
                                 <!-- Buttons -->
