@@ -34,7 +34,14 @@
                     </div>
                     <div class="widget-content">
                         <!-- Widget content -->
-
+                        <div class="widget-head">
+                            <a href="{{ url_for('ball.create', play_id=play[0]) }}">
+                                <button type="button" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-plus"></i>
+                                    新增逐球
+                                </button>
+                            </a>
+                    </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <tbody>
@@ -101,11 +108,6 @@
                                                 <td>{{ ball[3] }}</td>
                                                 <td>{{ ball[4] }}</td>
                                                 <td>
-                                                    <a href="{{ url_for('ball.create', play_id=play[0]) }}">
-                                                        <button type="button" class="btn btn-sm btn-primary">
-                                                            <i class="fa fa-plus"></i>新增球
-                                                        </button>
-                                                    </a>
                                                     <a href="{{ url_for('ball.update', play_id=ball[0], ball_order=ball[1]) }}">
                                                         <button class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> </button>
                                                     </a>
