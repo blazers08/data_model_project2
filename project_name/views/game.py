@@ -79,7 +79,9 @@ def search(page=0, items=10):
         query_condition = u" WHERE {0} LIKE '%{1}%'".format(session['s_key'], session['s_value'])
 
     if len(query_condition) != 0:
-        sql1 = u"SELECT COUNT(*) as total FROM play" + query_condition
+        sql1 = u"SELECT COUNT(*) as total FROM play p " \
+               u"INNER JOIN player t1 ON t1.player_id = p.pitcher_id " \
+               u"INNER JOIN player t2 ON t2.player_id = p.batter_id " + query_condition
         with conn.cursor() as cursor:
             cursor.execute(sql1)
             row = cursor.fetchone()
@@ -96,7 +98,10 @@ def search(page=0, items=10):
         else:
             sort_condition = "ORDER BY play_id ASC"
                 
-        sql2 = u"SELECT play_id, t1.player_name as pitcher_name, t2.player_name as batter_name, match_id, inning, half FROM play p INNER JOIN player t1 ON t1.player_id = p.pitcher_id INNER JOIN player t2 ON t2.player_id = p.batter_id " + query_condition + sort_condition
+        sql2 = u"SELECT play_id, t1.player_name as pitcher_name, t2.player_name as batter_name, match_id, inning, half " \
+               u"FROM play p " \
+               u"INNER JOIN player t1 ON t1.player_id = p.pitcher_id " \
+               u"INNER JOIN player t2 ON t2.player_id = p.batter_id " + query_condition + sort_condition
         skip = page * items
         if skip >= total:
             skip = 0
@@ -109,7 +114,7 @@ def search(page=0, items=10):
             plays = cursor.fetchall()
         print(plays)
 
-        misc = items_pagebar(total, page, items)  # 計算pagebar需要之參數
+        misc = items_pagebar(total, page, items, 'play_id')  # 計算pagebar需要之參數
         misc['s_key'] = session['s_key'] or u''
         misc['s_value'] = session['s_value'] or u''
         return render_template('play/list.html', plays=plays, misc=misc, action='search')

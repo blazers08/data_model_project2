@@ -38,7 +38,11 @@ def simple_list(page=0, items=10):
         else:  # 表示要asc
             sort_condition += u" ASC"
 
-    sql2 = u"SELECT match_id, t3.name as place, t1.team_name as Home, t2.team_name as Away, m_date FROM `match` m INNER JOIN `field` t3 ON m.field_id= t3.field_id INNER JOIN team t1 ON t1.team_id = m.m_hometeam INNER JOIN team t2 ON t2.team_id = m.m_awayteam" + sort_condition
+    sql2 = u"SELECT match_id, t3.name as place, t1.team_name as Home, t2.team_name as Away, m_date " \
+           u"FROM `match` m " \
+           u"INNER JOIN `field` t3 ON m.field_id= t3.field_id " \
+           u"INNER JOIN team t1 ON t1.team_id = m.m_hometeam " \
+           u"INNER JOIN team t2 ON t2.team_id = m.m_awayteam" + sort_condition
     skip = page * items
     if skip >= total:
         skip = 0
@@ -72,7 +76,11 @@ def search(page=0, items=10):
         query_condition = u" WHERE {0} LIKE '%{1}%'".format(session['s_key'], session['s_value'])
 
     if len(query_condition) != 0:
-        sql1 = u"SELECT COUNT(*) as total FROM `match`" + query_condition
+        sql1 = u"SELECT COUNT(*) as total " \
+               u"FROM `match` m " \
+               u"INNER JOIN `field` t3 ON m.field_id= t3.field_id " \
+               u"INNER JOIN team t1 ON t1.team_id = m.m_hometeam " \
+               u"INNER JOIN team t2 ON t2.team_id = m.m_awayteam" + query_condition
         with conn.cursor() as cursor:
             cursor.execute(sql1)
             row = cursor.fetchone()
@@ -87,7 +95,11 @@ def search(page=0, items=10):
             else:  # 表示要asc
                 sort_condition += u" ASC"
 
-        sql2 = u"SELECT match_id, t3.name as place, t1.team_name as Home, t2.team_name as Away, m_date FROM `match` m INNER JOIN `field` t3 ON m.field_id= t3.field_id INNER JOIN team t1 ON t1.team_id = m.m_hometeam INNER JOIN team t2 ON t2.team_id = m.m_awayteam" + query_condition + sort_condition
+        sql2 = u"SELECT match_id, t3.name as place, t1.team_name as Home, t2.team_name as Away, m_date " \
+               u"FROM `match` m " \
+               u"INNER JOIN `field` t3 ON m.field_id= t3.field_id " \
+               u"INNER JOIN team t1 ON t1.team_id = m.m_hometeam " \
+               u"INNER JOIN team t2 ON t2.team_id = m.m_awayteam" + query_condition + sort_condition
         skip = page * items
         if skip >= total:
             skip = 0

@@ -62,11 +62,10 @@
 												<label>Search:</label>
                                                 <select id="s_key" name="s_key" aria-controls="data-table-2">
                                                     <option value="play_id">打席ID</option>
-                                                    <option value="pitcher_id">投手名稱</option>
-                                                    <option value="batter_id">打者名稱</option>
+                                                    <option value="t1.player_name">投手名稱</option>
+                                                    <option value="t2.player_name">打者名稱</option>
                                                     <option value="match_id">比賽場次</option>
                                                     <option value="inning">第幾局</option>
-                                                    <option value="half">上下半場</option>
                                                 </select>
                                                 <input name="s_value" type="search" placeholder="search for ..." aria-controls="data-table-1" value="{{ misc['s_value'] }}">
                                                 <button type="submit" class="btn btn-sm btn-success">查詢</button>
