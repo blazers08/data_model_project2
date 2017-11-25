@@ -43,7 +43,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="pitcher_id"> 投手ID</label>
                                     <div class="col-md-7">
-                                        <select id="pitcher_id" class="select2" name="pitcher_id" aria-controls="data-table-2">
+                                        <select id="pitcher_id" class="player_select2" name="pitcher_id" aria-controls="data-table-2">
+                                            <option></option>
                                             {% for player in pitchers %}
                                             <option value="{{ player[0] }}">{{ player[1] }}</option>
                                             {% endfor %}
@@ -54,7 +55,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="batter_id"> 打者ID</label>
                                     <div class="col-md-7">
-                                        <select id="batter_id" class="select2" name="batter_id" aria-controls="data-table-3">
+                                        <select id="batter_id" class="player_select2" name="batter_id" aria-controls="data-table-3">
+                                            <option></option>
                                             {% for player in batters %}
                                             <option value="{{ player[0] }}">{{ player[1] }}</option>
                                             {% endfor %}
@@ -65,7 +67,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="match_id"> 比賽場次</label>
                                     <div class="col-md-7">
-                                        <select id="match_id" class="select2" name="match_id" aria-controls="data-table-2">
+                                        <select id="match_id" class="match_select2" name="match_id" aria-controls="data-table-2">
+                                            <option></option>
                                             {% for match in matches %}
                                             <option value="{{ match[0] }}">{{ match[1] }} @ {{ match[2] }}</option>
                                             {% endfor %}
@@ -122,4 +125,16 @@
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function() {
+    $('#match_id').select2({
+        width: '60%',
+        placeholder: '選擇賽事'
+        });
+    $('.player_select2').select2({
+        width: '60%',
+        placeholder:'選擇球員'
+        });
+});
+</script>
 {% endblock %}

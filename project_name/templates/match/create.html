@@ -42,7 +42,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="field_id"> 場地</label>
                                     <div class="col-md-7">
-                                        <select id="field_id" class="select2" name="field_id" aria-controls="data-table-2">
+                                        <select id="field_id" name="field_id" aria-controls="data-table-2">
+                                            <option></option>
                                             {% for field in fields %}
                                             <option value="{{ field[0] }}">{{ field[1] }}</option>
                                             {% endfor %}
@@ -54,7 +55,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="m_hometeam"> 主場球隊</label>
                                     <div class="col-md-7">
-                                        <select id="m_hometeam" class="select2" name="m_hometeam" aria-controls="data-table-2">
+                                        <select id="m_hometeam" class="team_select2" name="m_hometeam" aria-controls="data-table-2">
+                                            <option></option>
                                             {% for team in teams %}
                                             <option value="{{ team[0] }}">{{ team[1] }}</option>
                                             {% endfor %}
@@ -65,7 +67,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2" for="m_awayteam"> 客場球隊</label>
                                     <div class="col-md-7">
-                                        <select id="m_awayteam" class="select2" name="m_awayteam" aria-controls="data-table-2">
+                                        <select id="m_awayteam" class="team_select2" name="m_awayteam" aria-controls="data-table-2">
+                                            <option></option>
                                             {% for team in teams %}
                                             <option value="{{ team[0] }}">{{ team[1] }}</option>
                                             {% endfor %}
@@ -99,4 +102,16 @@
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function() {
+    $('#field_id').select2({
+        width: '60%',
+        placeholder: '選擇場地'
+        });
+    $('.team_select2').select2({
+        width: '60%',
+        placeholder:'選擇球隊'
+        });
+});
+</script>
 {% endblock %}
